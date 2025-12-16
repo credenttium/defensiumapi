@@ -23,9 +23,6 @@ public class DefensiumapiApplication {
 	@Value("${app.version}")
 	private String versao;
 
-	@Value("${app.description}")
-	private String descricao;
-
 	@Autowired
 	private Environment environment;
 
@@ -36,13 +33,13 @@ public class DefensiumapiApplication {
 	@GetMapping
 	public LinkedHashMap<String, String> getInformation() throws UnknownHostException {
 		LinkedHashMap<String, String> informacao = new LinkedHashMap<>();
-		informacao.put("Aplicação", "DefensiumService");
-		informacao.put("Porta", environment.getProperty("local.server.port"));
-		informacao.put("Descrição", descricao);
-		informacao.put("Ambiente", "Desenvolvimento");
-		informacao.put("Implantação", getRecuperarDataHora());
-		informacao.put("Versão", versao);
-		informacao.put("Endereço", InetAddress.getLocalHost().getHostAddress());
+			informacao.put("Aplicação", "DefensiumService");
+			informacao.put("Porta", environment.getProperty("local.server.port"));
+			informacao.put("Descrição", "Sistema de Gestão de Autenticação e Autorização de Usuários Multisistema");
+			informacao.put("Ambiente", "Desenvolvimento");
+			informacao.put("Implantação", getRecuperarDataHora());
+			informacao.put("Versão", versao);
+			informacao.put("Endereço", InetAddress.getLocalHost().getHostAddress());
 		return informacao;
 	}
 
