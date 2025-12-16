@@ -26,6 +26,8 @@ public class DefensiumapiApplication {
 	@Autowired
 	private Environment environment;
 
+	private LocalDateTime dataHoraImplantacao = LocalDateTime.now();
+
 	public static void main(String[] args) {
 		SpringApplication.run(DefensiumapiApplication.class, args);
 	}
@@ -40,12 +42,18 @@ public class DefensiumapiApplication {
 			informacao.put("Implantação", getRecuperarDataHora());
 			informacao.put("Versão", versao);
 			informacao.put("Endereço", InetAddress.getLocalHost().getHostAddress());
+			informacao.put("Demanda", getDemanda());
 		return informacao;
 	}
 
 	private String getRecuperarDataHora() {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		return LocalDateTime.now().format(dateTimeFormatter);
+		return this.dataHoraImplantacao.format(dateTimeFormatter);
+	}
+
+	private String getDemanda() {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+		return "DEFENSIUM".concat(LocalDateTime.now().format(dateTimeFormatter)).concat("API");
 	}
 
 }
