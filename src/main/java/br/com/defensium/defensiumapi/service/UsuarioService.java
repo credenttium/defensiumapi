@@ -1,5 +1,8 @@
 package br.com.defensium.defensiumapi.service;
 
+import java.util.Optional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.defensium.defensiumapi.entity.UsuarioEntity;
@@ -10,12 +13,23 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
+    // TODO: Usuário não pode ser duplicado
+    // TODO: Todos os campos obrigatorios devem ser informados
     public UsuarioEntity cadastrarUsuario(UsuarioEntity usuarioEntity) {
+        usuarioEntity.setSenha(this.passwordEncoder.encode(usuarioEntity.getSenha()));
         return this.usuarioRepository.save(usuarioEntity);
+    }
+
+    public UsuarioEntity recuperarUsuario(Long codigoUsuario) {
+        Optional<UsuarioEntity> usuarioEntityOptional = this.usuarioRepository.findById(codigoUsuario);
+        return usuarioEntityOptional.isPresent() ? usuarioEntityOptional.get() : new UsuarioEntity();
     }
 
 }
