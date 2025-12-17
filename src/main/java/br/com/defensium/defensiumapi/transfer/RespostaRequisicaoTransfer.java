@@ -4,8 +4,6 @@ import java.util.List;
 
 public class RespostaRequisicaoTransfer {
 
-    private String mensagem;
-
     private String situacao;
 
     private String dataHoraRequisicao;
@@ -13,14 +11,6 @@ public class RespostaRequisicaoTransfer {
     private List<String> erroList;
 
     public RespostaRequisicaoTransfer() {}
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
 
     public String getSituacao() {
         return situacao;

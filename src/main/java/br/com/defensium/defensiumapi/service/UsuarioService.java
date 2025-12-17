@@ -20,8 +20,6 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // TODO: Usuário não pode ser duplicado
-    // TODO: Todos os campos obrigatorios devem ser informados
     public UsuarioEntity cadastrarUsuario(UsuarioEntity usuarioEntity) {
         usuarioEntity.setSenha(this.passwordEncoder.encode(usuarioEntity.getSenha()));
         return this.usuarioRepository.save(usuarioEntity);
