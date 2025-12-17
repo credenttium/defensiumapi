@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.defensium.defensiumapi.entity.UsuarioEntity;
 import br.com.defensium.defensiumapi.service.UsuarioService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuario")
@@ -21,7 +22,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public UsuarioEntity cadastrarUsuario(@RequestBody UsuarioEntity usuarioEntity) {
+    public UsuarioEntity cadastrarUsuario(@RequestBody @Valid UsuarioEntity usuarioEntity) {
         return this.usuarioService.cadastrarUsuario(usuarioEntity);
     }
 

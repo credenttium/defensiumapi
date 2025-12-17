@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -22,12 +23,15 @@ public class UsuarioEntity {
     @Column(name = "code_public", unique = true, updatable = false, nullable = false)
     private String codePublic = UUID.randomUUID().toString();
 
+    @NotBlank(message = "O nome do Usuário é obrigatório")
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotBlank(message = "O usuário deve ser informado")
     @Column(name = "usuario", unique = true, nullable = false)
     private String usuario;
 
+    @NotBlank(message = "A senha do usuário deve ser informada")
     @Column(name = "senha", nullable = false)
     private String senha;
 
