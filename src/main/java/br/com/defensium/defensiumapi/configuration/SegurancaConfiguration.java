@@ -6,17 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-import br.com.defensium.defensiumapi.exception.AcessoNaoPermitidoException;
-
 @Configuration
 @EnableWebSecurity
 public class SegurancaConfiguration {
-
-    private final AcessoNaoPermitidoException acessoNaoPermitidoException;
-
-    public SegurancaConfiguration(AcessoNaoPermitidoException acessoNaoPermitidoException) {
-        this.acessoNaoPermitidoException = acessoNaoPermitidoException;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -25,10 +17,7 @@ public class SegurancaConfiguration {
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/usuario/registrar").permitAll()
-                        .anyRequest().authenticated())
-                .exceptionHandling(exception -> exception
-                    .accessDeniedHandler(acessoNaoPermitidoException)
-                );
+                        .anyRequest().authenticated());
         return httpSecurity.build();
     }
 
